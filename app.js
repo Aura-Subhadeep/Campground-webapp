@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv').config()
+const Campground = require('./models/campground')
+
 const app = express()
 
 const DataBase = process.env.MONGODB_URL
@@ -23,6 +25,11 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.get('/', (req, res) => {
     res.render('home')
+})
+
+app.get('/campgrounds', async(req, res) => {
+    const campgrounds = await Campground.find({})
+    res.render('campgrounds/index', {campgrounds})
 })
 
 const port = process.env.PORT

@@ -8,4 +8,6 @@ const campGroundSchema = new Schema({
     location: String
 })
 
-module.exports = mongoose.model('Campground', campGroundSchema)
+const Campground = mongoose.model('Campground', campGroundSchema)
+
+module.exports = Campground
