@@ -23,15 +23,29 @@ mongoose.connection.on('error', (error) => {
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
+// Home route
 app.get('/', (req, res) => {
     res.render('home')
 })
 
+// Campgrounds route
 app.get('/campgrounds', async(req, res) => {
     const campgrounds = await Campground.find({})
     res.render('campgrounds/index', {campgrounds})
 })
 
+// New route
+app.get('/campgrounds/new', (req, res) => {
+    res.render('campgrounds/new')
+})
+
+// Show route
+app.get('/campgrounds/:id', async(req, res) => {
+    const campground = await Campground.findById(req.params.id)
+    res.render('campgrounds/show', {campground})
+})
+
+// Server Port
 const port = process.env.PORT
 app.listen(port, () => {
     console.log(`The server is running on PORT ${port}`)
