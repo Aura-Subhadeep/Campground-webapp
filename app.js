@@ -68,6 +68,13 @@ app.put('/campgrounds/:id', async(req, res) => {
     res.redirect(`/campgrounds/${campground._id}`)
 })
 
+// Delete campground
+app.delete('/campgrounds/:id/', async(req, res) => {
+    const { id } = req.params
+    await Campground.findByIdAndDelete(id)
+    res.redirect('/campgrounds')
+})
+
 // Server Port
 const port = process.env.PORT
 app.listen(port, () => {
