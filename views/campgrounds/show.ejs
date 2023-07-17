@@ -1,13 +1,15 @@
 <% layout('/layouts/boilerplate')%>
-    <h1><%=campground.title%></h1>
-    <h2><%=campground.location%></h2>
-    <h2><%=campground._id%></h2>
-    <div>
+    <h1 class="py-2"><%=campground.title%></h1>
+    <h2 class="py-2"><%=campground.location%></h2>
+    <h4 class="py-2">$<%=campground.price%></h4>
+    <h4 class="py-2"><%=campground.description%></h4>
+    <img src="<%=campground.image%>" class="img-fluid">
+    <div class="py-3">
         <a href="/campgrounds/<%= campground._id %>/edit">Edit the Campground</a>
     </div>
-    <div>
+    <div class="py-3">
         <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
-            <button>Delete the campground</button>
+            <button class="btn btn-primary">Delete the campground</button>
         </form>
     </div>
     <footer>
