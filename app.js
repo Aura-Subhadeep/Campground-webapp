@@ -2,6 +2,7 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv').config()
+const ejsMate = require('ejs-mate')
 const method_override = require('method-override')
 const Campground = require('./models/campground')
 
@@ -21,6 +22,7 @@ mongoose.connection.on('error', (error) => {
     console.error('Error connecting to MongoDB Atlas:', error);
 })
 
+app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({extended: true}))
