@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv').config()
 const ejsMate = require('ejs-mate')
 const joi = require('joi')
+const {campgroundSchema} = require('./schemas.js')
 const catchAsync = require('./utils/catchAsync')
 const expressError = require('./utils/expressError')
 const method_override = require('method-override')
@@ -32,6 +33,16 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({extended: true}))
 app.use(method_override('_method'))
 
+const validateCampground = (req, res, next) => {
+    const {error} = campgroundSchema.validate(req.body)
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    } else {
+        next()
+    }
+}
+
 // Home route
 app.get('/', (req, res) => {
     res.render('home')
@@ -49,21 +60,7 @@ app.get('/campgrounds/new', (req, res) => {
 })
 
 // POST New campground
-app.post('/campgrounds', catchAsync (async(req, res, next) => {
-    const campgroundSchema = joi.onject({
-        campground: joi.object({
-            title: joi.string().required(),
-            Image: joi.string().required(),
-            location: joi.string().required(),
-            price: joi.number().required().min(0),
-        }).required()
-    })
-    const {error} = campgroundSchema.validate(req.body)
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    }
-    console.log(result)
+app.post('/campgrounds', validateCampground, catchAsync (async(req, res, next) => {
     const campground = new Campground(req.body.campground)
     await campground.save()
     res.redirect(`/campgrounds/${campground._id}`)
@@ -82,7 +79,7 @@ app.get('/campgrounds/:id/edit', catchAsync (async(req, res) => {
 }))
 
 // PUT Update (Edit) campground
-app.put('/campgrounds/:id', catchAsync (async(req, res) => {
+app.put('/campgrounds/:id', validateCampground, catchAsync (async(req, res) => {
     const { id } = req.params
     const campground = await Campground.findByIdAndUpdate(id, {...req.body.campground})
     res.redirect(`/campgrounds/${campground._id}`)
