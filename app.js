@@ -3,10 +3,12 @@ const path = require('path')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv').config()
 const ejsMate = require('ejs-mate')
+const joi = require('joi')
 const catchAsync = require('./utils/catchAsync')
 const expressError = require('./utils/expressError')
 const method_override = require('method-override')
 const Campground = require('./models/campground')
+const ExpressError = require('./utils/expressError')
 
 const app = express()
 
@@ -48,6 +50,20 @@ app.get('/campgrounds/new', (req, res) => {
 
 // POST New campground
 app.post('/campgrounds', catchAsync (async(req, res, next) => {
+    const campgroundSchema = joi.onject({
+        campground: joi.object({
+            title: joi.string().required(),
+            Image: joi.string().required(),
+            location: joi.string().required(),
+            price: joi.number().required().min(0),
+        }).required()
+    })
+    const {error} = campgroundSchema.validate(req.body)
+    if (error) {
+        const msg = error.details.map(el => el.message).join(',')
+        throw new ExpressError(msg, 400)
+    }
+    console.log(result)
     const campground = new Campground(req.body.campground)
     await campground.save()
     res.redirect(`/campgrounds/${campground._id}`)
@@ -85,8 +101,9 @@ app.all('*', (req, res, next) => {
 
 // Error handler
 app.use((err, req, res, next) => {
-    const {statusCode = 500, message = 'Something went wrong'} = err
-    res.status(statusCode).render('error')
+    const {statusCode = 500} = err
+    if (!err.message) err.message = 'oh No, Something Went Wrong!'
+    res.status(statusCode).render('error', {err})
 })
 
 // Server Port
