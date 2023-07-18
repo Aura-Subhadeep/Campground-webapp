@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv').config()
 const ejsMate = require('ejs-mate')
 const catchAsync = require('./utils/catchAsync')
+const expressError = require('./utils/expressError')
 const method_override = require('method-override')
 const Campground = require('./models/campground')
 
@@ -53,10 +54,10 @@ app.post('/campgrounds', catchAsync (async(req, res, next) => {
 }))
 
 // Show route
-app.get('/campgrounds/:id', async(req, res) => {
+app.get('/campgrounds/:id', catchAsync (async(req, res) => {
     const campground = await Campground.findById(req.params.id)
     res.render('campgrounds/show', {campground})
-})
+}))
 
 // Edit New campground
 app.get('/campgrounds/:id/edit', catchAsync (async(req, res) => {
@@ -72,16 +73,20 @@ app.put('/campgrounds/:id', catchAsync (async(req, res) => {
 }))
 
 // Delete campground
-app.delete('/campgrounds/:id/', async(req, res) => {
+app.delete('/campgrounds/:id/', catchAsync(async(req, res) => {
     const { id } = req.params
     await Campground.findByIdAndDelete(id)
     res.redirect('/campgrounds')
+}))
+
+app.all('*', (req, res, next) => {
+    next(new expressError('Page not fount', 404))
 })
 
-
 // Error handler
-app.use((err, req, res, next) =>{
-    res.send("got an error")
+app.use((err, req, res, next) => {
+    const {statusCode = 500, message = 'Something went wrong'} = err
+    res.status(statusCode).send(message)
 })
 
 // Server Port
