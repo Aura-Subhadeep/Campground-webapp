@@ -113,7 +113,6 @@ app.post('/campgrounds/:id/reviews', validateReview, catchAsync(async(req, res) 
     await review.save()
     await campground.save()
     res.redirect(`/campgrounds/${campground._id}`)
-    console.log(review)
 }))
 
 // Delete review
