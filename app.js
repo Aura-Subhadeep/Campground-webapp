@@ -116,6 +116,13 @@ app.post('/campgrounds/:id/reviews', validateReview, catchAsync(async(req, res) 
     console.log(review)
 }))
 
+// Delete review
+app.delete('/campgrounds/:id/reviews/:reviewid', catchAsync(async(req, res) => {
+    const { reviewid } = req.params
+    await Review.findByIdAndDelete(reviewid)
+    res.redirect(`/campgrounds/${req.params.id}`)
+}))
+
 app.all('*', (req, res, next) => {
     next(new expressError('Page not fount', 404))
 })
