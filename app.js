@@ -5,6 +5,7 @@ const dotenv = require('dotenv').config()
 const ejsMate = require('ejs-mate')
 const method_override = require('method-override')
 const ExpressError = require('./utils/ExpressError')
+const session = require('express-session')
 
 const campgrounds = require('./routes/campgrounds')
 const reviews = require('./routes/reviews')
@@ -31,6 +32,13 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({extended: true}))
 app.use(method_override('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
+
+const sessionConfig = {
+    secret: 'ThisShouldBeBetter',
+    resave: false,
+    saveUninitialized: true
+}
+app.use(session(sessionConfig))
 
 app.use('/campgrounds', campgrounds)
 app.use('/campgrounds/:id/reviews', reviews)
