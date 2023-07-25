@@ -1,0 +1,35 @@
+<% layout('/layouts/boilerplate')%>
+<h1 class="text-center py-5">Register</h1>
+<form action="/register" method="POST" class="validated-form" novalidate>
+    <div class="form-label mb-3">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" name="username" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+        <div class="invalid-feedback">
+            Please provide a valid Username.
+        </div>
+    </div>
+    <div class="form-label mb-3">
+        <label for="email">Email</label>
+        <input class="form-control" type="email" id="email" name="email" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+        <div class="invalid-feedback">
+            Please provide a valid email.
+        </div>
+    </div>
+    <div class="form-label mb-3">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" name="password" required>
+        <div class="valid-feedback">
+            Looks good!
+        </div>
+        <div class="invalid-feedback">
+            Please provide a password.
+        </div>
+    </div>
+    <button class="btn btn-success">Register</button>
+</form>

@@ -12,9 +12,9 @@ const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 
 
-const campgrounds = require('./routes/campgrounds')
-const reviews = require('./routes/reviews')
-const user = require('./models/user')
+const campgroundRoutes = require('./routes/campgrounds')
+const reviewRoutes = require('./routes/reviews')
+const userRoutes = require('./routes/users')
 
 const app = express()
 
@@ -65,8 +65,9 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 
-app.use('/campgrounds', campgrounds)
-app.use('/campgrounds/:id/reviews', reviews)
+app.use('/', userRoutes)
+app.use('/campgrounds', campgroundRoutes)
+app.use('/campgrounds/:id/reviews', reviewRoutes)
 
 // Home route
 app.get('/', (req, res) => {
