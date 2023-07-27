@@ -8,9 +8,14 @@
                 <p class="card-text"><%=campground.description%></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><%=campground.location%></li>
-                <li class="list-group-item">$<%=campground.price%></li>
-            </ul>
+                <li class="list-group-item text-muted"><%= campground.location %></li>
+                <% if (!campground.author || !campground.author.username) { %>
+                <li class="list-group-item">Featured by: The company</li>
+                <% } else { %>
+                <li class="list-group-item">Featured by: <%= campground.author.username %></li>
+                <% } %>
+                <li class="list-group-item">$<%= campground.price %></li>
+            </ul>            
             <div class="card-body d-flex justify-content-around">
                 <div>
                     <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
