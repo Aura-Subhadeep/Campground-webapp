@@ -70,7 +70,6 @@ app.use('/', userRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
-// Home route
 app.get('/', (req, res) => {
     res.render('home')
 })
@@ -79,14 +78,12 @@ app.all('*', (req, res, next) => {
     next(new ExpressError('Page not fount', 404))
 })
 
-// Error handler
 app.use((err, req, res, next) => {
     const {statusCode = 500} = err
     if (!err.message) err.message = 'oh No, Something Went Wrong!'
     res.status(statusCode).render('error', {err})
 })
 
-// Server Port
 const port = process.env.PORT
 app.listen(port, () => {
     console.log(`The server is running on PORT ${port}`)
