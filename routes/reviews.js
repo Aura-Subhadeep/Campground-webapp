@@ -7,10 +7,8 @@ const Review = require('../models/review')
 const ExpressError = require('../utils/ExpressError')
 const catchAsync = require('../utils/catchAsync')
 
-// POST New review
 router.post('/', isLoggedIn, validateReview, catchAsync(reviews.createReviews))
 
-// Delete review
 router.delete('/:reviewid', isLoggedIn, isReviewAuthor, catchAsync(reviews.deleteReview))
 
 module.exports = router
