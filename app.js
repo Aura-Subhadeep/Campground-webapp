@@ -12,12 +12,21 @@ const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize');
 const MongoDBStore = require('connect-mongo')(session)
+const cors = require('cors')
 
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 const userRoutes = require('./routes/users')
 
 const app = express()
+
+app.use(cors(
+    {
+        origin: ['https://yelp-camp-eight-jade.vercel.app/'],
+        method: ['POST', 'GET'],
+        Credential: true
+    }
+))
 
 const DataBase = process.env.MONGODB_URL
 
