@@ -1,5 +1,11 @@
-<% layout('/layouts/boilerplate')%>
-<div class="alert alert-danger" role="alert">
-    <h4 class="alert-heading"><%=err.message%></h4>
-    <p class=""><%= err.stack%></p>
+<% layout('/layouts/boilerplate') %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 offset-md-2">
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading"><%= err.message %></h4>
+        <p class="mb-0"><%= err.stack %></p>
+      </div>
+    </div>
+  </div>
 </div>
