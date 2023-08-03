@@ -11,7 +11,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize');
-
+const MongoDBStore = require('connect-mongo')(session)
 
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
@@ -41,8 +41,18 @@ app.use(method_override('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize());
 
+const secret = process.env.SECRET || 'ohhitssecre'
+
+const store = new MongoDBStore({
+    url: DataBase,
+    secret,
+    touchAfter: 24 * 60 * 60
+})
+
 const sessionConfig = {
-    secret: 'ThisShouldBeBetter',
+    store,
+    name: 'session',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -87,7 +97,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', {err})
 })
 
-const port = process.env.PORT
+const port = process.env.PORT || 8000
 app.listen(port, () => {
     console.log(`The server is running on PORT ${port}`)
 })
