@@ -1,26 +1,30 @@
-<% layout('/layouts/boilerplate')%>
-<h1 class="py-5 text-center">All campgrounds</h1>
-    <div class="text-center pb-5">
-        <a href="/campgrounds/new" class="text-decoration-none btn btn-primary">Create a New campground</a>
-    </div>
-<% for (let campground of campgrounds) {%>
-    <div class="card mb-3">
-        <div class="row">
-            <div class="">
-                <% campground.image.forEach((img, i) => { %>
-                <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-                    <img src="<%= img.url %>" class="d-block w-100">
-                </div>
-                <% }) %>
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h3 class="card-title"><%= campground.title%></h3>
-                    <h5 class="text-muted"><%= campground.location%></h5>
-                    <p class="card-text"><%= campground.description%></p>
-                    <a href="/campgrounds/<%=campground._id%>" class="btn btn-primary">View it Now</a>
-                </div>
-            </div>
+<% layout('/layouts/boilerplate') %>
+<div class="container my-5">
+  <h1 class="text-center py-5">Welcome to Our Campgrounds</h1>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% campgrounds.forEach(function(campground) { %>
+    <div class="col">
+      <div class="card h-100 shadow">
+        <img src="<%= campground.image[0].url %>" class="card-img-top" alt="Campground Image">
+        <div class="card-body">
+          <h5 class="card-title"><%= campground.title %></h5>
+          <p class="card-text"><%= campground.description.substring(0, 100) %>...</p>
         </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">
+            View Details
+          </a>
+          <div>
+            <a href="#" class="btn btn-outline-secondary me-2">
+              <i class="bi bi-heart"></i> Wishlist
+            </a>
+            <span>
+              <i class="bi bi-eye"></i> <%= campground.views %>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-<% } %>
+    <% }) %>
+  </div>
+</div>
