@@ -28,3 +28,90 @@ body {
         margin: 0 auto;
     }
 }
+
+.footer {
+    background-color: #f9c74f;
+    color: #333;
+    padding: 20px 0;
+}
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+.footer a:hover {
+    color: #4527A0;
+    text-decoration: none;
+}
+.footer .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+.footer .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Custom styles for the home page */
+.jumbotron {
+    background: url('/public/images/home-image.jpg') center/cover no-repeat;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jumbotron h1 {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.jumbotron p {
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.user-review {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.user-review blockquote {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.user-review small {
+    font-size: 1rem;
+    color: #888;
+}
+
+.features {
+    margin-top: 30px;
+}
+
+.features h2 {
+    margin-bottom: 20px;
+}
+
+.features .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
