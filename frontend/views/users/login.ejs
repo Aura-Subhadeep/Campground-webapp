@@ -1,9 +1,9 @@
-<% layout('/layouts/boilerplate') %>
+<% layout('../layouts/boilerplate') %>
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <h1 class="text-center mb-4">Register Now!</h1>
-      <form action="/register" method="POST" class="validated-form" novalidate>
+      <h1 class="text-center mb-4">Welcome back!</h1>
+      <form action="/login" method="POST" class="validated-form" novalidate>
         <div class="form-label mb-3">
           <label for="username" class="form-label">Username</label>
           <input class="form-control" type="text" id="username" name="username" required>
@@ -12,16 +12,6 @@
           </div>
           <div class="invalid-feedback">
             Please provide a valid Username.
-          </div>
-        </div>
-        <div class="form-label mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input class="form-control" type="email" id="email" name="email" required>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-          <div class="invalid-feedback">
-            Please provide a valid email.
           </div>
         </div>
         <div class="form-label mb-3">
@@ -34,10 +24,13 @@
             Please provide a password.
           </div>
         </div>
-        <button class="btn btn-primary btn-block">Register</button>
+        <button class="btn btn-primary btn-block">Login</button>
       </form>
       <div class="text-center mt-4 mb-2">
-        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Don't have an account? <a href="/register">Sign Up</a></p>
+      </div>
+      <div class="text-center mt-2">
+        <p>Forgot your password? <a href="/forgot-password">Reset Password</a></p>
       </div>
       <div class="text-center mt-2">
         <p>Back to <a href="/">Home</a></p>
