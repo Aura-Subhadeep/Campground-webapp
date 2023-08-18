@@ -5,7 +5,8 @@
     <% campgrounds.forEach(function(campground) { %>
     <div class="col">
       <div class="card h-100 shadow">
-        <img src="<%= campground.image[0].url %>" class="card-img-top" alt="Campground Image">
+        <img src="<%= campground.image[0].url.replace('/upload/', '/upload/c_scale,w_500,f_auto,q_auto/') %>"
+          class="card-img-top" alt="Campground Image">
         <div class="card-body">
           <h5 class="card-title"><%= campground.title %></h5>
           <p class="card-text"><%= campground.description.substring(0, 100) %>...</p>
