@@ -16,6 +16,7 @@ const MongoDBStore = require('connect-mongo')(session)
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 const userRoutes = require('./routes/users')
+const pricingRoutes = require('./routes/pricingpage')
 
 const app = express()
 
@@ -80,6 +81,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/', userRoutes)
+app.use('/pricing', pricingRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
@@ -88,7 +90,7 @@ app.get('/', (req, res) => {
 })
 
 app.all('*', (req, res, next) => {
-    next(new ExpressError('Page not fount', 404))
+    next(new ExpressError('Page not found', 404))
 })
 
 app.use((err, req, res, next) => {
