@@ -12,11 +12,11 @@ const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize');
 const MongoDBStore = require('connect-mongo')(session)
-
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 const userRoutes = require('./routes/users')
 const pricingRoutes = require('./routes/pricingpage')
+const aboutRoutes = require('./routes/aboutpage')
 
 const app = express()
 
@@ -82,6 +82,7 @@ app.use((req, res, next) => {
 
 app.use('/', userRoutes)
 app.use('/pricing', pricingRoutes)
+app.use('/about', aboutRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
