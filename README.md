@@ -20,3 +20,9 @@ This README will guide you on how to create a YelpCamp website using Node.js. Th
 git clone https://github.com/Aura-Subhadeep/full-stack-test-app.git
 ```
 
+2. Install dependencies: 
+
+```
+npm install
+```
+
