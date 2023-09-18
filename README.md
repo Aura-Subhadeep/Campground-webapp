@@ -42,3 +42,14 @@ npm start
 
 The app will be running on http://localhost:3000.
 
+## Features
+
+- Campgrounds page to view all campgrounds 
+- "Create New Campground" form to add new campgrounds
+- Campground show page to view details of a campground
+- Comments section on show page for users to leave reviews
+- User authentication with signup/login forms  
+- User profile pages  
+- Edit/delete campgrounds and comments that a user owns
+- Flash messages for feedback
+- Google Maps integration to show campground locations (WIP)
