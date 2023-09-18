@@ -34,3 +34,11 @@ API_KEY=your_cloudinary_api_key
 API_SECRET=your_cloudinary_api_secret
 ```
 
+4. Start the server:
+
+```
+npm start
+```
+
+The app will be running on http://localhost:3000.
+
