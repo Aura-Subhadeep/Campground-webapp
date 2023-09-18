@@ -26,3 +26,11 @@ git clone https://github.com/Aura-Subhadeep/full-stack-test-app.git
 npm install
 ```
 
+3. Create a .env file and add your MongoDB URI and Cloudinary API keys:
+
+```
+DATABASEURL=mongodb://localhost/yelp_camp  
+API_KEY=your_cloudinary_api_key
+API_SECRET=your_cloudinary_api_secret
+```
+
