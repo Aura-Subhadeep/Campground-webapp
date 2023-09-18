@@ -12,3 +12,11 @@ This README will guide you on how to create a YelpCamp website using Node.js. Th
 - Passport - For user authentication
 - Bootstrap - For CSS styling
 
+## Getting Started
+
+1. Clone the repository:
+
+```
+git clone https://github.com/Aura-Subhadeep/full-stack-test-app.git
+```
+
