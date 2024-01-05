@@ -1,6 +1,6 @@
- # YelpCamp Node.js Website
+ # A Node.js App
 
-This README will guide you on how to create a YelpCamp website using Node.js. The website will allow users to create and review campgrounds.
+The website will allow users to create and review campgrounds.
 
 ## Technologies Used
 
